@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>History of Insights</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        
+        :root {
+            --primary: #8B5CF6;
+            --secondary: #C4B5FD;
+            --accent: #7C3AED;
+            --background: #F5F3FF;
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --text: #1F2937;
+            --input-bg: rgba(255, 255, 255, 0.9);
+            --infisign-blue: #4169E1;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+            position: relative;
+            overflow-x: hidden;
+            background: 
+                linear-gradient(120deg, rgba(65, 105, 225, 0.2) 0%, rgba(65, 105, 225, 0.1) 100%),
+                radial-gradient(circle at top right, rgba(65, 105, 225, 0.4) 0%, transparent 50%),
+                radial-gradient(circle at bottom left, rgba(47, 97, 223, 0.4) 0%, transparent 50%),
+                linear-gradient(135deg, var(--infisign-blue), #2F61DF);
+            background-attachment: fixed;
+            color: var(--text);
+        }
+
+        .wave-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                repeating-linear-gradient(45deg, 
+                    rgba(65, 105, 225, 0.05) 0px,
+                    rgba(65, 105, 225, 0.05) 2px,
+                    transparent 2px,
+                    transparent 8px
+                );
+            pointer-events: none;
+            opacity: 0.4;
+        }
+
+        .floating-dots {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+                radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+            background-size: 40px 40px;
+            background-position: 0 0, 20px 20px;
+            animation: floatingDots 150s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes floatingDots {
+            0% {
+                background-position: 0 0, 20px 20px;
+            }
+            100% {
+                background-position: 1000px 1000px, 1020px 1020px;
+            }
+        }
+
+        /* Table Styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 2rem;
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        th {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        tr:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            border-radius: 20px;
+            width: 100%;
+            position: relative;
+        }
+
+        .logo-container {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .company-logo {
+            width: 150px;
+            height: auto;
+            object-fit: contain;
+        }
+
+        header h1 {
+            font-family: 'Inter', sans-serif;
+            color: white;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: -0.5px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .ai-icon {
+            font-size: 2.5rem;
+            color: white;
+            margin-bottom: 1rem;
+            animation: float 3s ease-in-out infinite;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .back-link {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .back-link a {
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="wave-bg"></div>
+    <div class="floating-dots"></div>
+    <div class="container">
+        <header>
+            <div class="logo-container">
+                <img src="https://cdn.prod.website-files.com/67057a5840c3c03968432af7/6705b0a637415c70e589f6ab_logo-main.svg" alt="Company Logo" class="company-logo">
+            </div>
+            <i class="fas fa-brain ai-icon"></i>
+            <h1>AI Insights & Visualizations</h1>
+        </header>
+        
+        <div class="card">
+            {% if history %}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Timestamp</th>
+                            <th>Question</th>
+                            <th>Answer</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for entry in history %}
+                            <tr>
+                                <td>{{ entry.timestamp }}</td>
+                                <td>{{ entry.question }}</td>
+                                <td>{{ entry.answer }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>No history available.</p>
+            {% endif %}
+        </div>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+        <div class="back-link">
+            <a href="/" style="color: black; text-decoration: none;">
+                <i class="fas fa-home" style="color: black;"></i> Back to Home</a>
+        </div>
+    </div>
+</body>
+</html>

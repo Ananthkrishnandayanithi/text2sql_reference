@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Insights & Visualizations</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        
+        :root {
+            --primary: #8B5CF6;
+            --secondary: #C4B5FD;
+            --accent: #7C3AED;
+            --background: #F5F3FF;
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --text: #1F2937;
+            --input-bg: rgba(255, 255, 255, 0.9);
+            --button-yellow: #FFD700;
+            --infisign-blue: #4169E1;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+            position: relative;
+            overflow-x: hidden;
+            background: 
+                linear-gradient(120deg, rgba(65, 105, 225, 0.2) 0%, rgba(65, 105, 225, 0.1) 100%),
+                radial-gradient(circle at top right, rgba(65, 105, 225, 0.4) 0%, transparent 50%),
+                radial-gradient(circle at bottom left, rgba(47, 97, 223, 0.4) 0%, transparent 50%),
+                linear-gradient(135deg, var(--infisign-blue), #2F61DF);
+            background-attachment: fixed;
+            color: var(--text);
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(90deg, rgba(255,255,255,.07) 1px, transparent 1px),
+                linear-gradient(0deg, rgba(255,255,255,.07) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% -20%, rgba(65, 105, 225, 0.3), transparent 70%);
+            pointer-events: none;
+        }
+
+        .wave-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                repeating-linear-gradient(45deg, 
+                    rgba(65, 105, 225, 0.05) 0px,
+                    rgba(65, 105, 225, 0.05) 2px,
+                    transparent 2px,
+                    transparent 8px
+                );
+            pointer-events: none;
+            opacity: 0.4;
+        }
+
+        .floating-dots {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+                radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+            background-size: 40px 40px;
+            background-position: 0 0, 20px 20px;
+            animation: floatingDots 150s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes floatingDots {
+            0% {
+                background-position: 0 0, 20px 20px;
+            }
+            100% {
+                background-position: 1000px 1000px, 1020px 1020px;
+            }
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            border-radius: 20px;
+            width: 100%;
+            position: relative;
+        }
+
+        .logo-container {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .company-logo {
+            width: 150px;
+            height: auto;
+            object-fit: contain;
+        }
+
+        header h1 {
+            font-family: 'Inter', sans-serif;
+            color: white;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: -0.5px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .ai-icon {
+            font-size: 2.5rem;
+            color: white;
+            margin-bottom: 1rem;
+            animation: float 3s ease-in-out infinite;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .card {
+            background: var(--card-bg);
+            padding: 3rem;
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .input-group {
+            margin-bottom: 2rem;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 0.75rem;
+            color: var(--text);
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        input[type="text"],
+        select {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid rgba(229, 231, 235, 0.8);
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: var(--input-bg);
+            color: var(--text);
+        }
+
+        input[type="text"]:focus,
+        select:focus {
+            border-color: var(--infisign-blue);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(65, 105, 225, 0.2);
+        }
+
+        select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%234169E1' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 1.2em;
+        }
+
+        button {
+            background: var(--button-yellow);
+            color: var(--text);
+            border: none;
+            padding: 1.2rem 2rem;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(255, 215, 0, 0.3);
+        }
+
+        button i {
+            margin-right: 0.75rem;
+            font-size: 1.2rem;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+            
+            header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .card {
+                padding: 1.5rem;
+            }
+
+            .logo-container {
+                position: static;
+                margin-bottom: 1rem;
+                transform: none;
+            }
+
+            .company-logo {
+                width: 100px;
+            }
+        }
+
+        ::placeholder {
+            color: #9CA3AF;
+        }
+
+        /* Loading Overlay Styles */
+        .loading-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .loading-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid var(--infisign-blue);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-message {
+            color: var(--text);
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .loading-submessage {
+            color: #666;
+            font-size: 0.9rem;
+        }
+    </style>
+    <script>
+        function showAlert() {
+            alert("Please wait 30 seconds after submitting your question for the output to generate.");
+        }
+
+        function showLoadingOverlay() {
+            document.getElementById('loadingOverlay').style.display = 'flex';
+            return true;
+        }
+    </script>
+</head>
+<body>
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <div class="loading-message">Processing your request...</div>
+            <div class="loading-submessage">This may take up to 30 seconds</div>
+        </div>
+    </div>
+
+    <div class="wave-bg"></div>
+    <div class="floating-dots"></div>
+    <div class="container">
+        <header>
+            <div class="logo-container">
+                <img src="https://cdn.prod.website-files.com/67057a5840c3c03968432af7/6705b0a637415c70e589f6ab_logo-main.svg" alt="Company Logo" class="company-logo">
+            </div>
+            <i class="fas fa-brain ai-icon"></i>
+            <h1>AI Insights & Visualizations</h1>
+        </header>
+        
+        <div class="card">
+            <form action="/generate" method="post" onsubmit="return showLoadingOverlay()">
+                <div class="input-group">
+                    <label for="question">Your Question</label>
+                    <input 
+                        type="text" 
+                        id="question"
+                        name="question" 
+                        placeholder="Example: A count of employees in each department?" 
+                        required
+                    >
+                </div>
+                
+                <div class="input-group">
+                    <label for="output">Output Type</label>
+                    <select name="output" id="output" required>
+                        <option value="answer">Table Insight</option>
+                        <option value="plot">Plot Insight</option>
+                        <option value="both">Both</option>
+                    </select>
+                </div>
+                
+                <button type="submit">
+                    <i class="fas fa-lightbulb"></i>
+                    Generate Insights
+                </button>
+            </form>
+            <form action="/schema" method="get" style="margin-top: 1rem;">
+                <button type="submit" style="background: var(--infisign-blue); color: white;">
+                    <i class="fas fa-database"></i>
+                    Schema
+                </button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

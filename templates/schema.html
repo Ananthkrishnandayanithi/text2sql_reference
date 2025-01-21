@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Available Schemas</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+        :root {
+            --primary: #8B5CF6;
+            --secondary: #C4B5FD;
+            --accent: #7C3AED;
+            --background: #F5F3FF;
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --text: #1F2937;
+            --input-bg: rgba(255, 255, 255, 0.9);
+            --infisign-blue: #4169E1;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+            background:
+                linear-gradient(120deg, rgba(65, 105, 225, 0.2) 0%, rgba(65, 105, 225, 0.1) 100%),
+                radial-gradient(circle at top right, rgba(65, 105, 225, 0.4) 0%, transparent 50%),
+                radial-gradient(circle at bottom left, rgba(47, 97, 223, 0.4) 0%, transparent 50%),
+                linear-gradient(135deg, var(--infisign-blue), #2F61DF);
+            background-attachment: fixed;
+            color: var(--text);
+        }
+
+        .wave-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23C4B5FD' fill-opacity='0.3' d='M0,96L48,122.7C96,149,192,203,288,224C384,245,480,235,576,202.7C672,171,768,117,864,101.3C960,85,1056,107,1152,128C1248,149,1344,171,1392,181.3L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-size: cover;
+            pointer-events: none;
+            opacity: 0.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            position: relative;
+            z-index: 1;
+        }
+
+        h1 {
+            color: var(--text);
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid rgba(139, 92, 246, 0.2);
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        pre {
+            font-family: monospace;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 1rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--accent), var(--primary));
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 600;
+            margin-top: 1.5rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(124, 58, 237, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="wave-bg"></div>
+    <div class="container">
+        <header>
+            <h1>Available Database Schemas</h1>
+        </header>
+        <main>
+            <pre>{{ schema_info }}</pre>
+            <button onclick="location.href='/'">Back to Home</button>
+        </main>
+    </div>
+</body>
+</html>

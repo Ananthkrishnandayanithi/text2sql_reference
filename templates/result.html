@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generated Output</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        
+        :root {
+            --primary: #8B5CF6;
+            --secondary: #C4B5FD;
+            --accent: #7C3AED;
+            --background: #F5F3FF;
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --text: #1F2937;
+            --input-bg: rgba(255, 255, 255, 0.9);
+            --infisign-blue: #4169E1;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+            position: relative;
+            overflow-x: hidden;
+            background: 
+                linear-gradient(120deg, rgba(65, 105, 225, 0.2) 0%, rgba(65, 105, 225, 0.1) 100%),
+                radial-gradient(circle at top right, rgba(65, 105, 225, 0.4) 0%, transparent 50%),
+                radial-gradient(circle at bottom left, rgba(47, 97, 223, 0.4) 0%, transparent 50%),
+                linear-gradient(135deg, var(--infisign-blue), #2F61DF);
+            background-attachment: fixed;
+            color: var(--text);
+        }
+
+        .wave-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23C4B5FD' fill-opacity='0.3' d='M0,96L48,122.7C96,149,192,203,288,224C384,245,480,235,576,202.7C672,171,768,117,864,101.3C960,85,1056,107,1152,128C1248,149,1344,171,1392,181.3L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-size: cover;
+            pointer-events: none;
+            opacity: 0.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            position: relative;
+            z-index: 1;
+        }
+
+        h1, h2 {
+            color: var(--text);
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid rgba(139, 92, 246, 0.2);
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1.5rem;
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 1rem 1.5rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(139, 92, 246, 0.1);
+        }
+
+        th {
+            background-color: rgba(139, 92, 246, 0.05);
+            color: var(--accent);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.875rem;
+            letter-spacing: 0.05em;
+        }
+
+        tr:nth-child(even) {
+            background-color: rgba(139, 92, 246, 0.02);
+        }
+
+        tr:hover {
+            background-color: rgba(139, 92, 246, 0.05);
+        }
+
+        .plot-container {
+            margin-top: 2rem;
+            text-align: center;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .plot-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .analysis-text {
+            line-height: 1.7;
+            color: var(--text);
+            margin: 1.5rem 0;
+            font-size: 1.05rem;
+        }
+
+        .analysis-text p {
+            margin-bottom: 1rem;
+        }
+
+        .back-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--accent), var(--primary));
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 600;
+            margin-top: 1.5rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .back-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(124, 58, 237, 0.3);
+        }
+
+        .back-button i {
+            margin-right: 0.5rem;
+        }
+
+        #alert-message {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background: rgba(124, 58, 237, 0.1);
+            border: 1px solid rgba(124, 58, 237, 0.5);
+            border-radius: 8px;
+            color: var(--text);
+            font-weight: 500;
+            display: none;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+            
+            .container {
+                padding: 1.5rem;
+            }
+            
+            th, td {
+                padding: 0.75rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="wave-bg"></div>
+    <div class="container">
+        {% if show_answer %}
+            <h1>Analysis Result</h1>
+            <div class="analysis-text">
+                {% if answer %}
+                    {% set sections = answer.split('|') %}
+                    {% if sections|length > 1 %}
+                        <div class="table-container">
+                            <table>
+                                {% for row in answer.split('\n') %}
+                                    {% if '|' in row %}
+                                        {% set cells = row.split('|') %}
+                                        {% if loop.index == 1 %}
+                                            <thead>
+                                                <tr>
+                                                    {% for cell in cells %}
+                                                        {% if cell.strip() and not cell.strip().startswith('-') %}
+                                                            <th>{{ cell.strip() }}</th>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                        {% elif not row.strip().startswith('|-') %}
+                                            <tr>
+                                                {% for cell in cells %}
+                                                    {% if cell.strip() %}
+                                                        <td>{{ cell.strip() }}</td>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </tr>
+                                        {% endif %}
+                                    {% endif %}
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% else %}
+                        <p>{{ answer }}</p>
+                    {% endif %}
+                {% endif %}
+            </div>
+        {% endif %}
+
+        {% if show_plot %}
+            <div class="plot-container">
+                <h2>Visual Analysis</h2>
+                <img src="{{ url_for('static', filename='plot.png') }}" alt="Analysis Plot">
+            </div>
+        {% endif %}
+
+        <button class="back-button" onclick="location.href='/'">
+            <i class="fas fa-arrow-left"></i> Back to Input
+        </button>
+        <button class="back-button" onclick="location.href='/history'">
+            <i class="fas fa-history"></i> History
+        </button>
+        
+        <div id="alert-message">
+            Please wait for 1 minute before submitting another question.
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const alertMessage = document.getElementById('alert-message');
+            alertMessage.style.display = 'block';
+            let countdown = 60;
+            const timerInterval = setInterval(() => {
+                countdown--;
+                if (countdown <= 0) {
+                    clearInterval(timerInterval);
+                    alertMessage.style.display = 'none';
+                } else {
+                    alertMessage.innerText = `Please wait for ${countdown} seconds before submitting another question.`;
+                }
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
